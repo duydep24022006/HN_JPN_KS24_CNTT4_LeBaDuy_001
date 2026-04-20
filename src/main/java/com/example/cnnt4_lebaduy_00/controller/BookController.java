@@ -37,7 +37,9 @@ public class BookController {
         if (bookDto.getCoverImage() == null || bookDto.getCoverImage().isEmpty()) {
             bindingResult.rejectValue("productImage", "error.productImage", "Ảnh sản phẩm không được để trống");
         }
-
+        if(bookService.findById(bookDto.getId())!=null){
+            bindingResult.rejectValue("id","error.id","Id đã tồn tại");
+        }
         if (bindingResult.hasErrors()) {
             return "book-form";
         }
