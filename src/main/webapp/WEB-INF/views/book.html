@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý Thiết bị</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+</head>
+
+<body class="container mt-4">
+
+<h1 class="mb-4 d-flex justify-center">Danh sách Book</h1>
+
+<!-- Thanh tìm kiếm -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <form class="form-inline mb-3" th:action="@{/}" method="get">
+        <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm theo tên hoặc tác giả">
+        <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Tìm kiếm</button>
+
+    </form>
+    <a th:href="@{/new}" class="btn btn-primary mb-3 ml-100">+ Thêm sách</a><form class="form-inline mb-3" th:action="@{/gadgets}" method="get">
+
+
+</form>
+
+</div>
+
+<!-- Bảng danh sách -->
+<table class="table table-bordered">
+    <thead class="thead-dark">
+    <tr>
+        <th>STT</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Quantity</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book,loop : ${book}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.quantity}"></td>
+        <td>
+            <img th:src="@{'/images/' + ${book.coverImage}}" width="80" height="80" alt="Ảnh sản phẩm"/>
+        </td>
+        <td>
+            <a th:href="@{'/edit/' + ${book.id}}" class="btn btn-sm btn-primary">Sửa</a>
+            <a th:href="@{'/delete/' + ${book.id}}"
+               onclick="return confirm('Bạn có chắc muốn xóa?')"
+               class="btn btn-sm btn-danger">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Nếu danh sách rỗng -->
+<p th:if="${#lists.isEmpty(book)}" class="text-danger">Kho hàng hiện đang trống</p>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
