@@ -9,7 +9,7 @@
 </head>
 <body class="container mt-4">
 
-<h2 th:text="${bookId != null} ? 'Cập nhật sách' : 'Thêm sách'" style="display: flex "></h2>
+<h2  style="display: flex ">Thêm sách</h2>
 
 <!-- Action tự động đổi giữa save và update -->
 <form th:action="${bookId != null} ? @{'/update/' + ${bookId}} : @{/save}"
@@ -17,7 +17,7 @@
       method="post"
       enctype="multipart/form-data">
 
-    <div class="form-group" style="${bookId != null} ? display: none: display">
+    <div class="form-group">
         <label>Id:</label>
         <input type="number" th:field="*{id}" class="form-control" placeholder="Nhập id..."/>
         <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="color:red"></p>
